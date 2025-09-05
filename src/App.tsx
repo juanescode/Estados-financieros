@@ -8,7 +8,7 @@ function App() {
       title: 'Estado de Resultados',
       subtitle: 'Diciembre 2024',
       description: 'Reporte de ingresos, gastos y utilidades del período',
-      file: '/src/assets/ER UOLASER DIC 2024.pdf',
+      file: '/ER UOLASER DIC 2024.pdf',
       icon: '📊'
     },
     {
@@ -16,13 +16,22 @@ function App() {
       title: 'Estado de Situación Financiera',
       subtitle: 'Diciembre 2024',
       description: 'Balance general de activos, pasivos y patrimonio',
-      file: '/src/assets/ESFA UOLASER DIC 2024.pdf',
+      file: '/ESFA UOLASER DIC 2024.pdf',
       icon: '📈'
     }
   ]
 
   const openDocument = (file: string) => {
     window.open(file, '_blank')
+  }
+
+  const downloadDocument = (file: string, filename: string) => {
+    const link = document.createElement('a')
+    link.href = file
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   return (
@@ -66,7 +75,7 @@ function App() {
                   </button>
                   <button 
                     className="btn-secondary"
-                    onClick={() => openDocument(doc.file)}
+                    onClick={() => downloadDocument(doc.file, doc.file.substring(1))}
                   >
                     Descargar PDF
                   </button>
